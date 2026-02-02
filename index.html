@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen - Sistemas de Información I | UPDS</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Fondo animado -->
+    <div class="bg-pattern"></div>
+    
+    <!-- PANTALLA DE INICIO -->
+    <section id="intro-screen" class="screen active">
+        <div class="intro-container">
+            <div class="logo-section">
+                <div class="university-badge">
+                    <div class="badge-icon">🎓</div>
+                    <div class="badge-text">UPDS</div>
+                </div>
+            </div>
+            
+            <h1 class="main-title">
+                <span class="title-line">Sistemas de</span>
+                <span class="title-line accent">Información I</span>
+            </h1>
+            
+            <p class="subtitle">Evaluación Interactiva</p>
+            
+            <div class="exam-info-cards">
+                <div class="info-card">
+                    <div class="info-icon">📋</div>
+                    <div class="info-text">
+                        <span class="info-label">Preguntas</span>
+                        <span class="info-value">13</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⏱️</div>
+                    <div class="info-text">
+                        <span class="info-label">Tiempo</span>
+                        <span class="info-value">60 min</span>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🏆</div>
+                    <div class="info-text">
+                        <span class="info-label">Puntaje</span>
+                        <span class="info-value">100 pts</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form id="student-form" class="student-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Ingrese su nombre completo">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo Institucional</label>
+                        <input type="email" id="email" name="email" required placeholder="correo@upds.edu.bo">
+                    </div>
+                    <div class="form-group">
+                        <label for="ci">Carnet de Identidad</label>
+                        <input type="text" id="ci" name="ci" required placeholder="Ej: 12345678">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">
+                    <span>Comenzar Examen</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
+            
+            <footer class="intro-footer">
+                <p>Docente: <strong>Ing. M.Sc. Jimmy Nataniel Requena Llorentty</strong></p>
+                <p class="footer-note">Universidad Privada Domingo Savio - Santa Cruz, Bolivia</p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- PANTALLA DE EXAMEN -->
+    <section id="exam-screen" class="screen">
+        <header class="exam-header">
+            <div class="header-left">
+                <div class="logo-mini">🎓 UPDS</div>
+                <div class="exam-title-mini">Sistemas de Información I</div>
+            </div>
+            <div class="header-center">
+                <div class="timer" id="timer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span id="timer-display">60:00</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="student-name-display" id="student-name-display"></div>
+                <div class="progress-indicator">
+                    <span id="progress-text">0/13</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="exam-container">
+            <!-- Navegación lateral -->
+            <nav class="question-nav" id="question-nav">
+                <div class="nav-title">Preguntas</div>
+                <div class="nav-grid" id="nav-grid">
+                    <!-- Se genera dinámicamente -->
+                </div>
+            </nav>
+
+            <!-- Contenido principal -->
+            <main class="question-area">
+                <div class="question-container" id="question-container">
+                    <!-- Se genera dinámicamente -->
+                </div>
+                
+                <div class="exam-actions">
+                    <button class="btn-secondary" id="btn-prev" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Anterior
+                    </button>
+                    <button class="btn-primary" id="btn-next">
+                        Siguiente
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <button class="btn-finish" id="btn-finish" style="display: none;">
+                        <span>Finalizar Examen</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- PANTALLA DE RESULTADOS -->
+    <section id="results-screen" class="screen">
+        <div class="results-container">
+            <div class="results-header">
+                <div class="score-circle" id="score-circle">
+                    <svg viewBox="0 0 200 200">
+                        <circle class="score-bg" cx="100" cy="100" r="90"/>
+                        <circle class="score-progress" cx="100" cy="100" r="90" id="score-progress"/>
+                    </svg>
+                    <div class="score-content">
+                        <span class="score-value" id="score-value">0</span>
+                        <span class="score-label">puntos</span>
+                    </div>
+                </div>
+                
+                <div class="results-info">
+                    <h2>¡Examen Completado!</h2>
+                    <p class="student-result-name" id="student-result-name"></p>
+                    <div class="result-stats">
+                        <div class="stat">
+                            <span class="stat-value" id="correct-count">0</span>
+                            <span class="stat-label">Correctas</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value" id="time-taken">00:00</span>
+                            <span class="stat-label">Tiempo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-details" id="results-details">
+                <!-- Se genera dinámicamente -->
+            </div>
+
+            <div class="results-actions">
+                <button class="btn-secondary" id="btn-download-pdf">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Descargar PDF
+                </button>
+                <button class="btn-primary" id="btn-upload-evidence">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Subir Evidencia
+                </button>
+            </div>
+
+            <!-- Modal de subida -->
+            <div class="upload-modal" id="upload-modal">
+                <div class="modal-content">
+                    <button class="modal-close" id="modal-close">&times;</button>
+                    <h3>Subir Evidencia al Drive</h3>
+                    <p>Selecciona el PDF de tu examen para subirlo a la carpeta del docente.</p>
+                    
+                    <div class="upload-area" id="upload-area">
+                        <input type="file" id="file-input" accept=".pdf" hidden>
+                        <div class="upload-icon">📁</div>
+                        <p>Arrastra tu archivo aquí o <span class="upload-link">selecciona un archivo</span></p>
+                        <p class="upload-hint">Solo archivos PDF (máx. 10MB)</p>
+                    </div>
+                    
+                    <div class="selected-file" id="selected-file" style="display: none;">
+                        <span class="file-icon">📄</span>
+                        <span class="file-name" id="file-name"></span>
+                        <button class="file-remove" id="file-remove">&times;</button>
+                    </div>
+                    
+                    <div class="upload-progress" id="upload-progress" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="upload-progress-fill"></div>
+                        </div>
+                        <span id="upload-status">Subiendo...</span>
+                    </div>
+                    
+                    <div class="upload-success" id="upload-success" style="display: none;">
+                        <div class="success-icon">✅</div>
+                        <p>¡Archivo subido exitosamente!</p>
+                    </div>
+                    
+                    <button class="btn-primary" id="btn-confirm-upload" disabled>
+                        Subir Archivo
+                    </button>
+                </div>
+            </div>
+
+            <footer class="results-footer">
+                <p>Docente: <strong>Ing. M.Sc. Jimmy Nataniel Requena Llorentty</strong></p>
+                <p>Universidad Privada Domingo Savio - UPDS</p>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="config.js"></script>
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
